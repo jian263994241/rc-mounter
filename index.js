@@ -1,5 +1,6 @@
 import React, {PureComponent, cloneElement} from 'react'
 import {render} from 'react-dom'
+import PropTypes from 'prop-types'
 
 function validateDOMElem (props, propName, componentName){
   const prop = props[propName];
