@@ -1,0 +1,28 @@
+{
+  "name": "rc-mounter",
+  "version": "1.0.0",
+  "description": "react componement mounter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jian263994241/rc-mounter.git"
+  },
+  "keywords": [
+    "react",
+    "mounter"
+  ],
+  "author": "jx.lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jian263994241/rc-mounter/issues"
+  },
+  "homepage": "https://github.com/jian263994241/rc-mounter#readme",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
