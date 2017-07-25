@@ -12,7 +12,8 @@
   },
   "keywords": [
     "react",
-    "mounter"
+    "mounter",
+    "rc-mounter"
   ],
   "author": "jx.lee",
   "license": "ISC",
