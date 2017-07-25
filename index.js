@@ -1,6 +1,9 @@
 import React, {PureComponent, cloneElement} from 'react'
 import {render} from 'react-dom'
 import PropTypes from 'prop-types'
+import ObjectAssign from 'object.assign'
+
+const assign = Object.assign || ObjectAssign;
 
 function validateDOMElem (props, propName, componentName){
   const prop = props[propName];
@@ -70,7 +73,7 @@ Mounter.mount = function (component, props){
       return rendered;
     },
     updateProps: function(props, callback){
-      rendered = render(cloneElement(component, Object.assign({}, rendered.props, props)), container, callback);
+      rendered = render(cloneElement(component, assign({}, rendered.props, props)), container, callback);
     }
   };
 };
