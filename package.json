@@ -1,8 +1,8 @@
 {
   "name": "rc-mounter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "react componement mounter",
-  "main": "dist/index.js",
+  "main": "_build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
