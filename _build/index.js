@@ -71,6 +71,7 @@ var Mounter = (_temp2 = _class = function (_PureComponent) {
     return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Mounter.__proto__ || (0, _getPrototypeOf2.default)(Mounter)).call.apply(_ref, [this].concat(args))), _this), _this.container = document.createElement('div'), _this.getContainer = function () {
       return _this.container;
     }, _this.destroy = function () {
+      (0, _reactDom.unmountComponentAtNode)(_this.container);
       _this.container.remove();
     }, _this.mounted = function (_ref2) {
       var children = _ref2.children,

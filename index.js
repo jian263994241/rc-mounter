@@ -1,5 +1,5 @@
 import React, {PureComponent, cloneElement} from 'react'
-import {render} from 'react-dom'
+import {render, unmountComponentAtNode} from 'react-dom'
 import PropTypes from 'prop-types'
 
 
@@ -32,6 +32,7 @@ export default class Mounter extends PureComponent {
   };
 
   destroy = ()=>{
+    unmountComponentAtNode(this.container);
     this.container.remove();
   };
 
