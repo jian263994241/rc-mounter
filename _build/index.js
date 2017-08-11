@@ -77,7 +77,7 @@ var Mounter = (_temp2 = _class = function (_PureComponent) {
       var children = _ref2.children,
           rest = (0, _objectWithoutProperties3.default)(_ref2, ['children']);
 
-      ReactDOM.render(_react2.default.createElement(
+      (0, _reactDom.render)(_react2.default.createElement(
         'div',
         rest,
         children
