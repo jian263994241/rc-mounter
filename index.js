@@ -37,7 +37,7 @@ export default class Mounter extends PureComponent {
   };
 
   mounted = ({children, ...rest})=>{
-    ReactDOM.render(<div {...rest}>{children}</div>, this.container);
+    render(<div {...rest}>{children}</div>, this.container);
   }
 
   componentDidMount(){
