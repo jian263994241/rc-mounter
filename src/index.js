@@ -26,7 +26,9 @@ export default class Mounter extends Component {
   };
 
   getComponent = ()=>{
-    return <div>{this.props.children}</div>;
+    const props = this.props;
+    const {prefixCls, ...rest} = this.props;
+    return <div {...rest}></div>;
   }
 
   removeContainer = () => {
