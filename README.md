@@ -1,11 +1,12 @@
 # rc-mounter
 
-在任意地方挂载节点
+在`document.body`挂载 react component ,  用于弹窗\浮层等场景.
 
-root 默认是 `document.body`
 
 ```html
 
-<Mounter root={root}>children</Mounter>
+<Mounter prefixCls="rc">
+  <MyComponent/>
+</Mounter>
 
 ```
