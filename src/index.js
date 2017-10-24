@@ -1,7 +1,7 @@
 import React, {Component, cloneElement} from 'react'
 import {render, unmountComponentAtNode, createPortal, unstable_renderSubtreeIntoContainer} from 'react-dom'
 import PropTypes from 'prop-types'
-console.log(React);
+
 export default class Mounter extends Component {
 
   static uiName = 'Mounter';
@@ -26,7 +26,7 @@ export default class Mounter extends Component {
   };
 
   getComponent = ()=>{
-    return this.props.children;
+    return <div>{this.props.children}</div>;
   }
 
   removeContainer = () => {
@@ -40,8 +40,6 @@ export default class Mounter extends Component {
     if(!createPortal){
       unstable_renderSubtreeIntoContainer(this, this.getComponent(), this.getContainer());
     }
-
-    // unstable_renderSubtreeIntoContainer(this, this.getComponent(), this.getContainer());
   }
 
   componentDidMount(){
@@ -57,8 +55,6 @@ export default class Mounter extends Component {
   }
 
   render() {
-
-    const {children} = this.props;
 
     if(createPortal){
       return createPortal(this.getComponent(), this.getContainer());

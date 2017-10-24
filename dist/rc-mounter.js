@@ -794,7 +794,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log(_react2.default);
 var Mounter = (_temp2 = _class = function (_Component) {
   (0, _inherits3.default)(Mounter, _Component);
 
@@ -819,7 +818,11 @@ var Mounter = (_temp2 = _class = function (_Component) {
       }
       return container;
     }, _this.getComponent = function () {
-      return _this.props.children;
+      return _react2.default.createElement(
+        'div',
+        null,
+        _this.props.children
+      );
     }, _this.removeContainer = function () {
       var container = document.querySelector('#' + _this.props.prefixCls + '-container');
       if (!container) return;
@@ -836,8 +839,6 @@ var Mounter = (_temp2 = _class = function (_Component) {
       if (!_reactDom.createPortal) {
         (0, _reactDom.unstable_renderSubtreeIntoContainer)(this, this.getComponent(), this.getContainer());
       }
-
-      // unstable_renderSubtreeIntoContainer(this, this.getComponent(), this.getContainer());
     }
   }, {
     key: 'componentDidMount',
@@ -857,8 +858,6 @@ var Mounter = (_temp2 = _class = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var children = this.props.children;
-
 
       if (_reactDom.createPortal) {
         return (0, _reactDom.createPortal)(this.getComponent(), this.getContainer());
