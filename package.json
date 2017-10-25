@@ -1,6 +1,6 @@
 {
   "name": "rc-mounter",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "react componement mounter",
   "main": "dist/rc-mounter.js",
   "scripts": {

@@ -1,4 +1,4 @@
-import React, {Component, cloneElement} from 'react'
+import React, {Component, isValidElement, cloneElement, createElement} from 'react'
 import {render, unmountComponentAtNode, createPortal, unstable_renderSubtreeIntoContainer} from 'react-dom'
 import PropTypes from 'prop-types'
 
@@ -8,10 +8,14 @@ export default class Mounter extends Component {
 
   static propTypes = {
     prefixCls: PropTypes.string,
+    visible: PropTypes.bool,
+    component: PropTypes.oneOfType([PropTypes.element , PropTypes.string])
   };
 
   static defaultProps = {
     prefixCls: 'rc',
+    visible: true,
+    component: 'div'
   };
 
   getContainer = ()=>{
@@ -27,8 +31,13 @@ export default class Mounter extends Component {
 
   getComponent = ()=>{
     const props = this.props;
-    const {prefixCls, ...rest} = this.props;
-    return <div {...rest}></div>;
+    const {prefixCls, visible, component, ...rest} = this.props;
+
+    if(isValidElement(component)){
+      return cloneElement(component, {...rest, visible})
+    }
+
+    return createElement(component, rest);
   }
 
   removeContainer = () => {
@@ -39,7 +48,7 @@ export default class Mounter extends Component {
   };
 
   renderComponent(){
-    if(!createPortal){
+    if(!createPortal && this.props.visible){
       unstable_renderSubtreeIntoContainer(this, this.getComponent(), this.getContainer());
     }
   }
@@ -50,6 +59,10 @@ export default class Mounter extends Component {
 
   componentDidUpdate(){
     this.renderComponent();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !!(this.props.visible || nextProps.visible);
   }
 
   componentWillUnmount(){

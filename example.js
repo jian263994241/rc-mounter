@@ -20,13 +20,18 @@ class Example extends Component {
   }
 
   render() {
+
+    const Span = (props)=>(
+      <div className="elem" {...props}></div>
+    )
+
     return (
       <div>
         <button onClick={this.clickHandler}>Click me.</button>
         <button onClick={this.reset}>reset</button>
       {
         this.state.list.length > 0 && (
-          <RcMounter>
+          <RcMounter >
             <ul>
               {this.state.list.map((item, key)=>(
                 <li key={key}>{item}</li>
