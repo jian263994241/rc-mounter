@@ -7,48 +7,43 @@ export default class Mounter extends Component {
   static uiName = 'Mounter';
 
   static propTypes = {
-    prefixCls: PropTypes.string,
-    visible: PropTypes.bool,
     component: PropTypes.oneOfType([PropTypes.element , PropTypes.string])
   };
 
   static defaultProps = {
-    prefixCls: 'rc',
-    visible: true,
     component: 'div'
   };
 
+  container = null;
+
   getContainer = ()=>{
-    const prefixCls = this.props.prefixCls;
-    let container = document.querySelector(`#${prefixCls}-container`);
-    if (!container) {
-      container = document.createElement('div');
-      container.setAttribute('id', `${prefixCls}-container`);
-      document.body.appendChild(container);
-    }
+    if(this.container) return this.container;
+    let container = document.createElement('div');
+    this.container = container;
+    document.body.appendChild(container);
     return container;
   };
 
   getComponent = ()=>{
     const props = this.props;
-    const {prefixCls, visible, component, ...rest} = this.props;
+    const {prefixCls, component, ...rest} = this.props;
 
     if(isValidElement(component)){
-      return cloneElement(component, {...rest, visible})
+      return cloneElement(component, {...rest})
     }
 
     return createElement(component, rest);
   }
 
   removeContainer = () => {
-    const container = document.querySelector(`#${this.props.prefixCls}-container`);
+    const container = this.container;
     if(!container) return ;
     if(!createPortal){ unmountComponentAtNode(container); }
     container.parentNode.removeChild(container);
   };
 
   renderComponent(){
-    if(!createPortal && this.props.visible){
+    if(!createPortal){
       unstable_renderSubtreeIntoContainer(this, this.getComponent(), this.getContainer());
     }
   }
@@ -59,10 +54,6 @@ export default class Mounter extends Component {
 
   componentDidUpdate(){
     this.renderComponent();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !!(this.props.visible || nextProps.visible);
   }
 
   componentWillUnmount(){

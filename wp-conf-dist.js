@@ -6,7 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'rc-mounter.js',
     libraryExport: "default" ,
-    libraryTarget: "amd"
+    libraryTarget: "umd"
   },
   module: {
     rules: [

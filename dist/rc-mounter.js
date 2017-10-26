@@ -1,4 +1,14 @@
-define(["react","react-dom","prop-types"], function(__WEBPACK_EXTERNAL_MODULE_92__, __WEBPACK_EXTERNAL_MODULE_93__, __WEBPACK_EXTERNAL_MODULE_94__) { return /******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("react"), require("react-dom"), require("prop-types"));
+	else if(typeof define === 'function' && define.amd)
+		define(["react", "react-dom", "prop-types"], factory);
+	else {
+		var a = typeof exports === 'object' ? factory(require("react"), require("react-dom"), require("prop-types")) : factory(root["react"], root["react-dom"], root["prop-types"]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(this, function(__WEBPACK_EXTERNAL_MODULE_92__, __WEBPACK_EXTERNAL_MODULE_93__, __WEBPACK_EXTERNAL_MODULE_94__) {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -828,31 +838,27 @@ var Mounter = (_temp2 = _class = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Mounter.__proto__ || (0, _getPrototypeOf2.default)(Mounter)).call.apply(_ref, [this].concat(args))), _this), _this.getContainer = function () {
-      var prefixCls = _this.props.prefixCls;
-      var container = document.querySelector('#' + prefixCls + '-container');
-      if (!container) {
-        container = document.createElement('div');
-        container.setAttribute('id', prefixCls + '-container');
-        document.body.appendChild(container);
-      }
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Mounter.__proto__ || (0, _getPrototypeOf2.default)(Mounter)).call.apply(_ref, [this].concat(args))), _this), _this.container = null, _this.getContainer = function () {
+      if (_this.container) return _this.container;
+      var container = document.createElement('div');
+      _this.container = container;
+      document.body.appendChild(container);
       return container;
     }, _this.getComponent = function () {
       var props = _this.props;
       var _this$props = _this.props,
           prefixCls = _this$props.prefixCls,
-          visible = _this$props.visible,
           component = _this$props.component,
-          rest = (0, _objectWithoutProperties3.default)(_this$props, ['prefixCls', 'visible', 'component']);
+          rest = (0, _objectWithoutProperties3.default)(_this$props, ['prefixCls', 'component']);
 
 
       if ((0, _react.isValidElement)(component)) {
-        return (0, _react.cloneElement)(component, (0, _extends3.default)({}, rest, { visible: visible }));
+        return (0, _react.cloneElement)(component, (0, _extends3.default)({}, rest));
       }
 
       return (0, _react.createElement)(component, rest);
     }, _this.removeContainer = function () {
-      var container = document.querySelector('#' + _this.props.prefixCls + '-container');
+      var container = _this.container;
       if (!container) return;
       if (!_reactDom.createPortal) {
         (0, _reactDom.unmountComponentAtNode)(container);
@@ -864,7 +870,7 @@ var Mounter = (_temp2 = _class = function (_Component) {
   (0, _createClass3.default)(Mounter, [{
     key: 'renderComponent',
     value: function renderComponent() {
-      if (!_reactDom.createPortal && this.props.visible) {
+      if (!_reactDom.createPortal) {
         (0, _reactDom.unstable_renderSubtreeIntoContainer)(this, this.getComponent(), this.getContainer());
       }
     }
@@ -877,11 +883,6 @@ var Mounter = (_temp2 = _class = function (_Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
       this.renderComponent();
-    }
-  }, {
-    key: 'shouldComponentUpdate',
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      return !!(this.props.visible || nextProps.visible);
     }
   }, {
     key: 'componentWillUnmount',
@@ -901,12 +902,8 @@ var Mounter = (_temp2 = _class = function (_Component) {
   }]);
   return Mounter;
 }(_react.Component), _class.uiName = 'Mounter', _class.propTypes = {
-  prefixCls: _propTypes2.default.string,
-  visible: _propTypes2.default.bool,
   component: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.string])
 }, _class.defaultProps = {
-  prefixCls: 'rc',
-  visible: true,
   component: 'div'
 }, _temp2);
 exports.default = Mounter;
@@ -1955,5 +1952,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_93__;
 module.exports = __WEBPACK_EXTERNAL_MODULE_94__;
 
 /***/ })
-/******/ ])["default"]});;
+/******/ ])["default"];
+});
 //# sourceMappingURL=rc-mounter.js.map
