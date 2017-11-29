@@ -1,4 +1,4 @@
-import React, {Component, isValidElement, cloneElement, createElement} from 'react'
+import React, {Component, isValidElement, cloneElement, createElement, Fragment} from 'react'
 import {render, unmountComponentAtNode, createPortal, unstable_renderSubtreeIntoContainer} from 'react-dom'
 import PropTypes from 'prop-types'
 
@@ -11,7 +11,7 @@ export default class Mounter extends Component {
   };
 
   static defaultProps = {
-    component: 'div'
+    component: Fragment || 'div'
   };
 
   container = null;
