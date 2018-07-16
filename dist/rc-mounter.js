@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -13,6 +11,10 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _querySelectorAll = require('dom-helpers/query/querySelectorAll');
 
@@ -54,27 +56,32 @@ var Mounter = function (_Component) {
           style = _props.style,
           target = _props.target;
 
-      className && (container.className = className);
-      style && (0, _style2.default)(container, style);
-      (0, _querySelectorAll2.default)(document, target)[0].appendChild(container);
       this.container = container;
+
+      className && (this.container.className = className);
+      style && (0, _style2.default)(this.container, style);
+      (0, _querySelectorAll2.default)(document, target)[0].appendChild(this.container);
+
       return this.container;
     }
   }, {
     key: 'getComponent',
     value: function getComponent() {
       var _props2 = this.props,
-          component = _props2.component,
           className = _props2.className,
           style = _props2.style,
           target = _props2.target,
-          rest = _objectWithoutProperties(_props2, ['component', 'className', 'style', 'target']);
+          children = _props2.children,
+          rest = _objectWithoutProperties(_props2, ['className', 'style', 'target', 'children']);
+      // if(isValidElement(component)){
+      //   return cloneElement(component, props);
+      // }
+      //
+      // return createElement(component, props);
+      //
 
-      if ((0, _react.isValidElement)(component)) {
-        return (0, _react.cloneElement)(component, _extends({}, rest));
-      }
 
-      return (0, _react.createElement)(component, rest);
+      return children;
     }
   }, {
     key: 'removeContainer',
@@ -96,9 +103,8 @@ var Mounter = function (_Component) {
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      var _props3 = this.props,
-          className = _props3.className,
-          style = _props3.style;
+      var className = nextProps.className,
+          style = nextProps.style;
 
       var container = this.getContainer();
       className && (container.className = className);
@@ -138,6 +144,10 @@ exports.default = Mounter;
 
 
 Mounter.defaultProps = {
-  component: _react.Fragment || 'div',
   target: 'body'
+};
+
+Mounter.propTypes = {
+  target: _propTypes2.default.string,
+  children: _propTypes2.default.element.isRequired
 };

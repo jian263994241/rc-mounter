@@ -1,6 +1,6 @@
 {
   "name": "rc-mounter",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "react componement mounter",
   "main": "dist/rc-mounter.js",
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/jian263994241/rc-mounter#readme",
   "dependencies": {
-    "dom-helpers": "^3.3.1"
+    "dom-helpers": "^3.3.1",
+    "prop-types": "^15.6.2"
   }
 }

@@ -1,5 +1,6 @@
 import React, {Component, isValidElement, cloneElement, createElement, Fragment} from 'react'
 import {render, unmountComponentAtNode, createPortal, unstable_renderSubtreeIntoContainer} from 'react-dom';
+import PropTypes from 'prop-types';
 import querySelectorAll from 'dom-helpers/query/querySelectorAll';
 import $style from 'dom-helpers/style';
 
@@ -14,21 +15,24 @@ export default class Mounter extends Component {
     if(this.container) return this.container;
     const container = document.createElement('div');
     const {className, style, target} = this.props;
-    className && (container.className = className);
-    style && $style(container, style);
-    querySelectorAll(document, target)[0].appendChild(container);
     this.container = container;
+
+    className && (this.container.className = className);
+    style && $style(this.container, style);
+    querySelectorAll(document, target)[0].appendChild(this.container);
+
     return this.container;
   };
 
   getComponent(){
-    const {component, className, style, target, ...rest} = this.props;
-
-    if(isValidElement(component)){
-      return cloneElement(component, {...rest})
-    }
-
-    return createElement(component, rest);
+    const {className, style, target, children, ...rest} = this.props;
+    // if(isValidElement(component)){
+    //   return cloneElement(component, props);
+    // }
+    //
+    // return createElement(component, props);
+    //
+    return children;
   }
 
   removeContainer() {
@@ -45,7 +49,7 @@ export default class Mounter extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    const {className, style} = this.props;
+    const {className, style} = nextProps;
     const container = this.getContainer();
     className && (container.className = className);
     style && $style(container, style);
@@ -75,6 +79,10 @@ export default class Mounter extends Component {
 }
 
 Mounter.defaultProps = {
-  component: Fragment || 'div',
   target: 'body'
+};
+
+Mounter.propTypes = {
+  target: PropTypes.string,
+  children: PropTypes.element.isRequired
 };
