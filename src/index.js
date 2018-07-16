@@ -1,22 +1,14 @@
 import React, {Component, isValidElement, cloneElement, createElement, Fragment} from 'react'
-import {render, unmountComponentAtNode, createPortal, unstable_renderSubtreeIntoContainer} from 'react-dom'
-import PropTypes from 'prop-types'
+import {render, unmountComponentAtNode, createPortal, unstable_renderSubtreeIntoContainer} from 'react-dom';
 
 export default class Mounter extends Component {
 
-  static uiName = 'Mounter';
+  constructor(props){
+  	super(props)
+    this.container = null;
+  }
 
-  static propTypes = {
-    component: PropTypes.oneOfType([PropTypes.element , PropTypes.string])
-  };
-
-  static defaultProps = {
-    component: Fragment || 'div'
-  };
-
-  container = null;
-
-  getContainer = ()=>{
+  getContainer(){
     if(this.container) return this.container;
     let container = document.createElement('div');
     this.container = container;
@@ -24,7 +16,7 @@ export default class Mounter extends Component {
     return container;
   };
 
-  getComponent = ()=>{
+  getComponent(){
     const props = this.props;
     const {prefixCls, component, ...rest} = this.props;
 
@@ -35,7 +27,7 @@ export default class Mounter extends Component {
     return createElement(component, rest);
   }
 
-  removeContainer = () => {
+  removeContainer() {
     const container = this.container;
     if(!container) return ;
     if(!createPortal){ unmountComponentAtNode(container); }
@@ -70,3 +62,7 @@ export default class Mounter extends Component {
   }
 
 }
+
+Mounter.defaultProps = {
+  component: Fragment || 'div'
+};
