@@ -1,5 +1,7 @@
 import React, {Component, isValidElement, cloneElement, createElement, Fragment} from 'react'
 import {render, unmountComponentAtNode, createPortal, unstable_renderSubtreeIntoContainer} from 'react-dom';
+import querySelectorAll from 'dom-helpers/query/querySelectorAll';
+import $style from 'dom-helpers/style';
 
 export default class Mounter extends Component {
 
@@ -10,15 +12,17 @@ export default class Mounter extends Component {
 
   getContainer(){
     if(this.container) return this.container;
-    let container = document.createElement('div');
+    const container = document.createElement('div');
+    const {className, style, target} = this.props;
+    className && (container.className = className);
+    style && $style(container, style);
+    querySelectorAll(document, target)[0].appendChild(container);
     this.container = container;
-    document.body.appendChild(container);
-    return container;
+    return this.container;
   };
 
   getComponent(){
-    const props = this.props;
-    const {prefixCls, component, ...rest} = this.props;
+    const {component, className, style, target, ...rest} = this.props;
 
     if(isValidElement(component)){
       return cloneElement(component, {...rest})
@@ -38,6 +42,13 @@ export default class Mounter extends Component {
     if(!createPortal){
       unstable_renderSubtreeIntoContainer(this, this.getComponent(), this.getContainer());
     }
+  }
+
+  componentWillReceiveProps(nextProps){
+    const {className, style} = this.props;
+    const container = this.getContainer();
+    className && (container.className = className);
+    style && $style(container, style);
   }
 
   componentDidMount(){
@@ -64,5 +75,6 @@ export default class Mounter extends Component {
 }
 
 Mounter.defaultProps = {
-  component: Fragment || 'div'
+  component: Fragment || 'div',
+  target: 'body'
 };

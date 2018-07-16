@@ -14,6 +14,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
+var _querySelectorAll = require('dom-helpers/query/querySelectorAll');
+
+var _querySelectorAll2 = _interopRequireDefault(_querySelectorAll);
+
+var _style = require('dom-helpers/style');
+
+var _style2 = _interopRequireDefault(_style);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -41,19 +49,26 @@ var Mounter = function (_Component) {
     value: function getContainer() {
       if (this.container) return this.container;
       var container = document.createElement('div');
+      var _props = this.props,
+          className = _props.className,
+          style = _props.style,
+          target = _props.target;
+
+      className && (container.className = className);
+      style && (0, _style2.default)(container, style);
+      (0, _querySelectorAll2.default)(document, target)[0].appendChild(container);
       this.container = container;
-      document.body.appendChild(container);
-      return container;
+      return this.container;
     }
   }, {
     key: 'getComponent',
     value: function getComponent() {
-      var props = this.props;
-
-      var _props = this.props,
-          prefixCls = _props.prefixCls,
-          component = _props.component,
-          rest = _objectWithoutProperties(_props, ['prefixCls', 'component']);
+      var _props2 = this.props,
+          component = _props2.component,
+          className = _props2.className,
+          style = _props2.style,
+          target = _props2.target,
+          rest = _objectWithoutProperties(_props2, ['component', 'className', 'style', 'target']);
 
       if ((0, _react.isValidElement)(component)) {
         return (0, _react.cloneElement)(component, _extends({}, rest));
@@ -77,6 +92,17 @@ var Mounter = function (_Component) {
       if (!_reactDom.createPortal) {
         (0, _reactDom.unstable_renderSubtreeIntoContainer)(this, this.getComponent(), this.getContainer());
       }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _props3 = this.props,
+          className = _props3.className,
+          style = _props3.style;
+
+      var container = this.getContainer();
+      className && (container.className = className);
+      style && (0, _style2.default)(container, style);
     }
   }, {
     key: 'componentDidMount',
@@ -112,5 +138,6 @@ exports.default = Mounter;
 
 
 Mounter.defaultProps = {
-  component: _react.Fragment || 'div'
+  component: _react.Fragment || 'div',
+  target: 'body'
 };
