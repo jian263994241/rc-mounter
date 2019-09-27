@@ -1,6 +1,6 @@
 {
   "name": "rc-mounter",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "react componement mounter",
   "main": "lib/Portal.js",
   "scripts": {
@@ -24,15 +24,12 @@
   },
   "homepage": "https://github.com/jian263994241/rc-mounter#readme",
   "peerDependencies": {
-    "@babel/runtime": "^7.5.5",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/runtime": "^7.5.5",
-    "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "prop-types": "^15.7.2"
   }
 }
