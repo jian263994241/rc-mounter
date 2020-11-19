@@ -15,7 +15,7 @@ import { Portal } from 'rc-mounter';
 
 - container
 - children
-- disablePortal
+- disabled
 - onRendered
 
 
@@ -40,7 +40,7 @@ Portal.propTypes = {
    * Disable the portal behavior.
    * The children stay within it's parent DOM hierarchy.
    */
-  disablePortal: PropTypes.bool,
+  disabled: PropTypes.bool,
   /**
    * Callback fired once the children has been mounted into the `container`.
    *
