@@ -1,10 +1,24 @@
 {
   "name": "rc-mounter",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "react componement mounter",
-  "main": "lib/Portal.js",
+  "source": "src/index.tsx",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "src",
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsdx watch --entry src/index.tsx",
+    "build": "tsdx build --entry src/index.tsx",
+    "lint": "tsdx lint src",
+    "lint:fix": "tsdx lint src --fix",
+    "test": "tsdx test",
+    "test:watch": "tsdx test --watch",
+    "test:coverage": "tsdx test --coverage"
   },
   "repository": {
     "type": "git",
@@ -13,9 +27,8 @@
   "keywords": [
     "react",
     "react component",
-    "mounter",
-    "createPortal",
-    "Portal"
+    "react createPortal",
+    "react Portal"
   ],
   "author": "jx.lee",
   "license": "ISC",
@@ -25,11 +38,20 @@
   "homepage": "https://github.com/jian263994241/rc-mounter#readme",
   "peerDependencies": {
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.5.5",
-    "prop-types": "^15.7.2"
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.0",
+    "@types/aria-query": "^4.2.0",
+    "@types/jest": "^26.0.15",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.9",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "tsdx": "^0.14.1"
   }
 }

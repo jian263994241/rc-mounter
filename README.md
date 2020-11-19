@@ -3,7 +3,7 @@
 Use `ReactDOM.createPortal` as a component.
 
 ```jsx
-import Portal from 'rc-mounter';
+import { Portal } from 'rc-mounter';
 
 <Portal>
 // code....
@@ -34,7 +34,7 @@ Portal.propTypes = {
   container: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.instanceOf(React.Component),
-    PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element),
+    PropTypes.instanceOf(Element),
   ]),
   /**
    * Disable the portal behavior.
@@ -44,7 +44,6 @@ Portal.propTypes = {
   /**
    * Callback fired once the children has been mounted into the `container`.
    *
-   * This prop will be deprecated and removed in v5, the ref can be used instead.
    */
   onRendered: PropTypes.func,
 };
