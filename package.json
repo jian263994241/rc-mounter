@@ -1,6 +1,6 @@
 {
   "name": "rc-mounter",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "react componement mounter",
   "source": "src/index.tsx",
   "main": "dist/index.js",
@@ -36,10 +36,12 @@
     "url": "https://github.com/jian263994241/rc-mounter/issues"
   },
   "homepage": "https://github.com/jian263994241/rc-mounter#readme",
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  },
   "peerDependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^16.8.0 || ^17",
+    "react-dom": "^16.8.0 || ^17"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.6",
@@ -49,7 +51,6 @@
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
-    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "tsdx": "^0.14.1"
