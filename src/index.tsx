@@ -42,33 +42,35 @@ const PortalPropTypes = {
   onRendered: PropTypes.func
 };
 
-const Portal: React.FC<InferProps<typeof PortalPropTypes>> = (props) => {
-  const { children, disabled, onRendered, container = document.body } = props;
+const Portal: React.FC<InferProps<typeof PortalPropTypes>> = React.forwardRef(
+  (props, ref) => {
+    const { children, disabled, onRendered, container = document.body } = props;
 
-  const [mountNode, setMountNode] = React.useState<HTMLElement | null>(null);
+    const [mountNode, setMountNode] = React.useState<HTMLElement | null>(null);
 
-  useEnhancedEffect(() => {
-    if (!disabled) {
-      setMountNode(getContainer(container as Container));
+    useEnhancedEffect(() => {
+      if (!disabled) {
+        setMountNode(getContainer(container as Container));
+      }
+    }, [container, disabled]);
+
+    useEnhancedEffect(() => {
+      if (onRendered && (mountNode || disabled)) {
+        onRendered();
+      }
+    }, [onRendered, mountNode, disabled]);
+
+    if (disabled) {
+      return children as React.ReactElement;
     }
-  }, [container, disabled]);
 
-  useEnhancedEffect(() => {
-    if (onRendered && (mountNode || disabled)) {
-      onRendered();
+    if (mountNode) {
+      return ReactDOM.createPortal(children, mountNode);
     }
-  }, [onRendered, mountNode, disabled]);
 
-  if (disabled) {
-    return children as React.ReactElement;
+    return null;
   }
-
-  if (mountNode) {
-    return ReactDOM.createPortal(children, mountNode);
-  }
-
-  return null;
-};
+);
 
 Portal.propTypes = PortalPropTypes;
 
